@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2d9c0b3b-79bb-4ee6-8c3d-43b86397d609",
+		"_postman_id": "52540fbc-7a64-44dc-ac25-24bbad6043cb",
 		"name": "ProductoJwtDemo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,8 +9,49 @@
 			"name": "Productos",
 			"item": [
 				{
+					"name": "Productos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNjE3Mzg3OTIzLCJleHAiOjE2MTc0MjM5MjN9.HRdl32_cASXqvmDq_Q-j4-IoMW_ofDSUf-ZebZSoVcXQtiRufLobqdZjZQE2filvUrs8pydZqyPIn1HxzTe0_Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/producto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"producto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Crear producto",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTYxNzM4NzkzMCwiZXhwIjoxNjE3NDIzOTMwfQ.ieGw70VCgnwQwF13o3O2UnG8IPh3C-gXSayesv80zOLSOvmjCo5wEs1witH1DDc0b5Kw6ztjU7zLd7Ws-1VujQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -63,6 +104,9 @@
 				{
 					"name": "Actualizar Producto",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "PUT",
 						"header": [],
 						"url": {
@@ -91,23 +135,94 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Seguridad",
+			"item": [
 				{
-					"name": "Productos",
+					"name": "Nuevo usuario",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"admin2\",\r\n    \"nombreUsuario\": \"admin2\",\r\n    \"email\": \"admin2@prueba.com\",\r\n    \"password\": \"admin2\",\r\n    \"roles\": [\r\n        \"ADMIN\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/producto",
+							"raw": "http://localhost:8080/auth/nuevo",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"api",
-								"v1",
-								"producto"
+								"auth",
+								"nuevo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombreUsuario\": \"admin\", \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombreUsuario\": \"user\", \"password\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
 							]
 						}
 					},

@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lmalvarez.demo.exception.NotFoundException;
+import com.lmalvarez.demo.exception.CustomNotFoundException;
 
 @Service
 public class ProductoService {
@@ -26,7 +26,7 @@ public class ProductoService {
 	
 	public Producto getProductoById(Long id){
 		Producto producto = productoRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Producto con id " + id + " no existe"));
+				.orElseThrow(() -> new CustomNotFoundException("Producto con id " + id + " no existe"));
 		return producto;
 	}
 	
@@ -37,7 +37,7 @@ public class ProductoService {
 	public void eliminarProducto(Long id) {
 		boolean exists = productoRepository.existsById(id);
 		if (!exists) {
-			throw new NotFoundException("Producto con id " + id + " no existe");
+			throw new CustomNotFoundException("Producto con id " + id + " no existe");
 		}
 		productoRepository.deleteById(id);
 

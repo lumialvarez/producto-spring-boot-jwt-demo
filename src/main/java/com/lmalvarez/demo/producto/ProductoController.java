@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,16 +33,19 @@ public class ProductoController {
 		return productoService.getProductoById(productoId);
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
 	public void nuevoProducto(@Valid @RequestBody Producto producto) {
 		productoService.nuevoProducto(producto);
 	}
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping(path = "{productoId}")
 	public void eliminarProducto(@PathVariable("productoId") Long productoId) {
 		productoService.eliminarProducto(productoId);
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping(path = "{productoId}")
 	public void updateStudent(@PathVariable("productoId") Long productoId, @RequestParam(required = false) String nombre,
 			@RequestParam(required = false) BigDecimal precio) {
